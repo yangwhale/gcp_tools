@@ -17,13 +17,10 @@ npm install --save sns-validator
 npm install --save --save-exact @google-cloud/pubsub
 gcloud beta functions deploy receiveNotification --trigger-http --stage-bucket gs://<your-backet-name> --runtime nodejs8 --allow-unauthenticated
 ```
-
 Copy the httpsTrigger URL in the output after the function deploys. You use the URL in the next step.
 
 ### Creating the SNS subscription
-In the AWS console, go to your SNS topic and create a subscription.
-Choose HTTPS as the protocol.
-Enter the Cloud Function URL that you copied earlier.
-Click Create Subscription.
-Copy the ARN or subscription.
-replace 
+* In the AWS console, go to your SNS topic and create a subscription.
+* Choose HTTPS as the protocol.
+* Enter the Cloud Function URL that you copied earlier.
+* Click Create Subscription.
