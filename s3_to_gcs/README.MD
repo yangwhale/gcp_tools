@@ -24,3 +24,15 @@ Copy the httpsTrigger URL in the output after the function deploys. You use the 
 * Choose HTTPS as the protocol.
 * Enter the Cloud Function URL that you copied earlier.
 * Click Create Subscription.
+
+
+## process pubsub message and transfer object from s3 to gcs
+
+### Go to folder trans_s3_to_gcs
+Update mail.py
+* replace <your-base-url> with your s3 endpoint base URL or CDN base URL.
+* replace <your-gcs-bucketname> with your destination bucket name.
+
+```bash
+gcloud beta functions deploy process_pubsub --trigger-topic <your-topic> --stage-bucket gs://<your-bucket-name> --runtime python37
+```
