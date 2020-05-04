@@ -41,9 +41,12 @@ exports.receiveNotification = function receiveNotification (req, res) {
 
   // use the sns-validator library to verify signature
   // we first parse the cloud function body into a javascript object
-  validator.validate(JSON.parse(req.body), function (err, message) {
+  //validator.validate(JSON.parse(req.body), function (err, message) {
+  validator.encoding = 'utf8';
+  validator.validate(req.body, function (err, message) {
     if (err) {
       // the message did not validate
+      console.log(err);
       res.status(403).end('invalid SNS message');
       return;
     }
@@ -88,7 +91,7 @@ exports.receiveNotification = function receiveNotification (req, res) {
 
         var msgData = Buffer.from(message.Message);
 
-        topic.publisher().publish(msgData, attributes).then(function (results) {
+        topic.publish(msgData, attributes).then(function (results) {
           console.log('message published ' + results[0]);
           res.status(200).end('ok');
         });
